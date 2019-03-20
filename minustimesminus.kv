@@ -1,0 +1,554 @@
+#:kivy 1.9.1
+
+#:import main main
+#:import App kivy.app
+#:import about_module about_module
+#:import lang_m languages
+
+<Label>:
+    markup: True
+    color: 0,0,0,1
+
+<Button>:
+    markup: True
+    color: 0,0,0,1
+    border: 0,0,0,0
+    background_normal: 'own_images/simple_grey_button.png'
+    background_down: 'own_images/simple_grey_button_pressed.png'
+    background_disabled_normal: self.background_down
+    disabled: app.buttons_disabled
+
+# ----------------------------------------------------------------------------------------------------------------------
+<SpacingLabel@Label>:   # (used simply for spacing widgets, since padding has fixed only values)
+
+<PaintedLabel@Label>:
+    label_background: 0,0,0,0
+
+    canvas.before:
+        Color:
+            rgba: self.label_background
+        Rectangle:
+            pos: root.pos
+            size: self.size
+
+<HDelimiterLabel>:
+    color:
+
+<ConfinedTextLabel>:
+    color: 0,0,0,1
+    text_size: self.width * .8, None
+    size_hint_y: None
+    height: self.texture_size[1]
+
+<ScrollLabel>:
+    text: ''
+    ConfinedTextLabel:
+        text: root.text
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Numpad
+<NumpadBaseButton>:
+    size_hint_x: .99/5.     # 5 int-buttons in a single row
+    size_hint_y: .99/3.     # 3 rows
+    bold: True
+    font_size: '18sp'
+
+<DecimalSeparatorButton>:
+    text: '.'
+    size_hint_x: .99/4.2
+
+<ClearAnswerButton>:
+    text: 'CLEAR'
+    size_hint_x: .36
+
+<CheckAnswerButton>:
+    text: 'Check\nanswer'
+    size_hint_x: 1
+
+# ----------------------------------------------------------------------------------------------------------------------
+<CoinCountBox@BoxLayout>:
+    coin_im_source: ''
+    coins_count: 0
+    orientation: 'horizontal'
+    FloatLayout:
+        Image:
+            source: root.coin_im_source
+            pos_hint: {'center_x': .5, 'center_y': .5}
+    Label:
+        size_hint_x: .7
+        text: 'x'
+        color: (0,0,0,1) if root.coins_count else (.4,.4,.4,.4)
+    Label:
+        size_hint_x: .2
+        text: str(root.coins_count)
+        bold: True
+        color: (0,0,0,1) if root.coins_count else (.4,.4,.4,.4)
+    SpacingLabel:
+        size_hint_x: .3
+
+<TickImage@Image>:
+    goal_complete: False
+    source: 'third_parties_images/tick_yes.png'
+    color: (1,1,1,1) if self.goal_complete else (.2,.2,.2,.2)
+
+<WreathImage>:
+    source: 'third_parties_images/gold_laurel_small.jpg'
+    color: (1,1,1,1) if self.goal_complete else (.2,.2,.2,.6)
+
+<MyProgressBar>:
+    max: 1
+    value: 0
+    limited_value: min(self.value, self.max)
+    # Filled ratio should never be 0 or 1
+    # otherwise it would cause size_hints equal to 0,
+    # that is, None-type value, resulting in ignoring size_hint
+    filled_ratio: max(.00001, min(.9999, float(self.value) / self.max))
+    empty_ratio: 1-self.filled_ratio
+    filled_color: 0,1,0,1
+    empty_color: .6,.6,.6,.4
+
+    size_hint_y: .5
+    pos_hint: {'center_x': .5, 'center_y': .5}
+    canvas.before:
+        Color:
+            rgba: root.filled_color
+        Rectangle:
+            size: root.width * root.filled_ratio, root.height
+            pos: root.pos
+        Color:
+            rgba: root.empty_color
+        Rectangle:
+            size: root.width * root.empty_ratio, root.height
+            pos: root.x + root.width*root.filled_ratio, root.y
+
+<ProgressBarWithTick@BoxLayout>:
+    max: 1
+    points_earned: 0
+    orientation: 'horizontal'
+    goal_complete: bar.value >= bar.max
+
+    MyProgressBar:
+        id: bar
+        max: root.max
+        value: root.points_earned
+    Label:
+        text: '{}/{}'.format(int(bar.limited_value), bar.max)
+        font_size: '10sp'
+    TickImage:
+        goal_complete: root.goal_complete
+
+<ProgressBarsX3@BoxLayout>:
+    orientation: 'vertical'
+    points_earned: 0
+    goal_complete_x3: bar_widg_1.goal_complete and bar_widg_2.goal_complete and bar_widg_3.goal_complete
+    ProgressBarWithTick:
+        id: bar_widg_1
+        max: 1
+        points_earned: root.points_earned
+    ProgressBarWithTick:
+        id: bar_widg_2
+        max: 10
+        points_earned: root.points_earned
+    ProgressBarWithTick:
+        id: bar_widg_3
+        max: 50
+        points_earned: root.points_earned
+
+<SingleProgressBox@BoxLayout>:
+    orientation: 'horizontal'
+    points_earned: 0
+    coin_im_source: ''
+    filled_color: 0,1,0,1
+    empty_color: .6,.6,.6,.4
+    padding: '10sp', '10sp'
+
+    CoinCountBox:
+        coin_im_source: root.coin_im_source
+        coins_count: root.points_earned
+    ProgressBarsX3:
+        id: progress_bar_x3
+        points_earned: root.points_earned
+    WreathImage:
+        goal_complete: progress_bar_x3.goal_complete_x3
+        size_hint_y: .8
+
+<CoinsSingleProgressBox@SingleProgressBox>:
+    diff_lvl: '1'
+    op_type: 'addition'
+    points_required: 100
+    points_earned: app.store[root.op_type][self.diff_lvl]
+    coin_im_source: main.DIFF_TO_COIN_MAP[self.diff_lvl]['im_path']
+
+<SingleDaysInARowProgressBox@BoxLayout>:
+    orientation: 'horizontal'
+    days: 1
+    points_earned: app.store_visiting['consecutive_days']
+    earned_in_the_past: 0
+    goal_complete: bar_widg.goal_complete
+    BoxLayout:
+        Label:
+            text: '{} days in a row'.format(root.days)
+        ProgressBarWithTick:
+            id: bar_widg
+            max: root.days
+            points_earned: self.max if root.earned_in_the_past else root.points_earned
+
+<DaysInARowProgressBox@BoxLayout>:
+    BoxLayout:
+        orientation: 'vertical'
+        SingleDaysInARowProgressBox:
+            id: bar_widg_1
+            padding: '0sp','5sp'
+            earned_in_the_past: app.store_visiting['achiev_5_days']
+            days: 5
+        SingleDaysInARowProgressBox:
+            id: bar_widg_2
+            padding: '0sp','5sp'
+            earned_in_the_past: app.store_visiting['achiev_30_days']
+            days: 30
+    WreathImage:
+        size_hint: .4,.7
+        goal_complete: (bar_widg_1.goal_complete and bar_widg_2.goal_complete)
+
+
+<VersionLabel@Label>:
+    pos_hint: {'center_x': .8, 'center_y': .07}
+    size_hint: .9, .2
+
+    text: '{} {}'.format('version', main.__version__)
+    font_size: '12sp'
+
+<OperationProgressBox@BoxLayout>:
+    orientation: 'vertical'
+    op_type: 'addition'
+    op_title: ''
+    Label:
+        size_hint_y: .05
+        text: root.op_title
+        bold: True
+    CoinsSingleProgressBox:
+        op_type: root.op_type
+        diff_lvl: '1'
+    CoinsSingleProgressBox:
+        op_type: root.op_type
+        diff_lvl: '2'
+    CoinsSingleProgressBox:
+        op_type: root.op_type
+        diff_lvl: '3'
+
+<AnsweringMetricsTracker@Label>
+    text: "Correct: {}, wrong: {}, skipped: {}".format(app.store_answers['correct'],app.store_answers['wrong'],app.store_answers['skipped'])
+    font_size: '10sp'
+
+<AllWreaths>:
+    orientation: 'vertical'
+    Label:
+        text: 'Total wreaths'
+        bold: True
+    BoxLayout:
+        id: wreaths_images_box
+        orientation: 'horizontal'
+        padding: '5sp','5sp'
+
+# ----------------------------------------------------------------------------------------------------------------------
+<ArrowIm@Image>
+    source: 'own_images/arrow.png'
+    angle: 0
+    canvas.before:
+        PushMatrix
+        Rotate:
+            angle: self.angle
+            origin: self.center
+    canvas.after:
+        PopMatrix
+
+<SplittingArrows@GridLayout>:
+    cols: 2
+    size_hint_y: .3
+    ArrowIm:
+        angle: 180+50
+        size_hint_y: .7
+    ArrowIm:
+        angle: -50
+        size_hint_y: .7
+    SpacingLabel
+    SpacingLabel
+
+<DownArrows@GridLayout>
+    cols: 2
+    ArrowIm:
+        size_hint: 1,.2
+        angle: -90
+    ArrowIm:
+        size_hint: 1,.2
+        angle: -90
+
+# ----------------------------------------------------------------------------------------------------------------------
+<MemoRule>
+    lang: ''
+    orientation: 'vertical'
+    pos_hint: {'center_x': .5, 'center_y': .5}
+    size_hint: .9, .9
+    Label:
+        text: root.f(root.lang, 'addition')
+        bold: True
+        size_hint_y: .5
+    SplittingArrows
+    BoxLayout
+        Label:
+            text: root.f(root.lang, 'add_same_sign')
+        Label:
+            text: root.f(root.lang, 'add_diff_sign')
+    Label:
+        text: root.f(root.lang, 'multiplication')
+        bold: True
+        size_hint_y: .5
+    SplittingArrows
+    BoxLayout:
+        Label:
+            text: root.f(root.lang, 'mult_same_sign')
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+        Label:
+            text: root.f(root.lang, 'mult_diff_sign')
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+
+<MainWidget>:
+    app: app
+    #lang: lang_button.lang
+
+    canvas.before:
+        Color:
+            rgba: 1,1,.8,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    FloatLayout:
+        VersionLabel
+        BoxLayout:
+            id: language_widget
+            orientation: 'vertical'
+            pos_hint: {'center_x': .3, 'center_y': .2}
+            size_hint: .26, .08
+            #Label:
+            #    text: 'Language'
+            #    bold: True
+            #LanguageButton:
+            #    id: lang_button
+        Label:
+            pos_hint: {'center_x': .5, 'center_y': .8}
+            size_hint: .9, .1
+            text: main.APP_NAME
+            font_size: '30sp'
+        BoxLayout:
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            size_hint: .5, .35
+            orientation: 'vertical'
+
+            Button:
+                text: 'Play'
+                bold: True
+                on_release: root.load_slide(play_page)
+            Button:
+                text: 'Rewards'
+                bold: True
+                on_release: root.load_slide(rewards_page)
+            Button:
+                text: 'Help'
+                bold: True
+                on_release: root.load_slide(help_page)
+            Button:
+                text: 'About'
+                on_release: root.load_slide(about_page)
+            Button:
+                text: 'Citations'
+                on_release: root.load_slide(citations_page)
+
+    PlayPage:
+        id: play_page
+        rewards_shortcut: rewards_shortcut
+
+        # Options at top
+        GridLayout:
+            pos_hint: {'center_x': .5, 'center_y': .9}
+            size_hint: .9, .08
+            rows: 2
+
+            Label:
+                size_hint_x: .7
+                size_hint_y: .4
+                text: 'Operation type'
+            SpacingLabel:
+                size_hint_x: .1
+                size_hint_y: .4
+            Label:
+                size_hint_x: .3
+                size_hint_y: .4
+                text: 'Difficulty'
+            OpButton:
+                id: op_button
+                size_hint_x: .7
+            SpacingLabel:
+                size_hint_x: .1
+            DifficultyButton:
+                size_hint_x: .3
+                id: difficulty_btn
+
+        BoxLayout:
+            id: q_a_display
+            orientation: 'horizontal'
+            pos_hint: {'center_x': .4, 'center_y': .6}
+            size_hint: .5, .08
+
+            QuestionDisplay:
+                id: q_display
+                text: ''.join([self.question_str, ' = '])
+                font_size: '20sp'
+                difficulty_lvl: difficulty_btn.difficulty_lvl
+                on_difficulty_lvl: self.set_new_q_and_a()
+                op_type: op_button.operation_type
+                on_op_type: self.set_new_q_and_a()
+            Label:
+                id: a_display
+                text: numpad.user_answer
+                text_size: None, self.height
+                halign: 'left'
+                valign: 'middle'
+                font_size: q_display.font_size
+        Numpad:
+            id: numpad
+            pos_hint: {'x': .1, 'y': .1}
+            size_hint: .6, .24
+        RevealAnswerButton:
+            pos_hint: {'center_x': .15, 'center_y': .5}
+            size_hint: .15, .05
+            text: 'Reveal'
+            background_color: 1,0,0,1
+            id: reveal_answer_button
+            a_feed_label: a_feed_label
+            q_display: q_display
+            numpad: numpad
+            app: app
+            on_release: self.apply_button_effects()
+        Label:
+            id: a_feed_label
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            size_hint: .4, .07
+            text: ''
+            font_size: '18sp'
+            bold: True
+            text_size: None, self.height
+            halign: 'left'
+            valign: 'middle'
+        CheckAnswerButton:
+            pos_hint: {'right': .9, 'center_y': .6}
+            size_hint: .2, .1
+            text: 'Check'
+            background_color: 0,1,0,1
+            user_answer: numpad.user_answer
+            user_answer_widget:
+            numpad: numpad
+            app: app
+            play_page: play_page
+            q_display_obj: q_display
+            correct_answer_val: q_display.correct_answer_val
+            difficulty_lvl: difficulty_btn.difficulty_lvl
+            op_type: op_button.operation_type
+            on_release: self.check_a_and_apply_effects(a_feed_label=a_feed_label)
+        Button:
+            id: rewards_shortcut
+            pos_hint: {'center_x': .84, 'center_y': .4}
+            size_hint: .2, .1
+            text: 'Total coins\n[b]{}[/b]'.format(app.total_coins)
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+            on_release: root.load_slide(rewards_page)
+
+    BoxLayout:
+        id: rewards_page
+        orientation: 'vertical'
+        Label:
+            size_hint_y: .1
+            text: 'Rewards'
+            font_size: '20sp'
+            bold: True
+        BoxLayout:
+            size_hint_y: .6
+            orientation: 'vertical'
+            OperationProgressBox:
+                op_type: 'addition'
+                op_title: 'Addition, subtraction'
+            SpacingLabel:
+                size_hint_y: .05
+            OperationProgressBox:
+                op_type: 'multiplication'
+                op_title: 'Multiplication'
+        Label:
+            size_hint_y: .06
+            text: '(total coins {})'.format(app.total_coins)
+            font_size: '12sp'
+            text_size: self.size
+            halign: 'left'
+            valign: 'middle'
+        DaysInARowProgressBox
+            padding: '0sp','0sp','0sp','10sp'
+            size_hint_y: .1
+        AllWreaths:
+            size_hint_y: .15
+        AnsweringMetricsTracker:
+            size_hint_y: .05
+        ResetRewardsButton
+            app: app
+            size_hint: .2, .05
+            pos_hint: {'right': .95}
+
+    BoxLayout:
+        id: help_page
+        orientation: 'vertical'
+        Label:
+            size_hint_y: .05
+            bold: True
+            font_size: '20sp'
+            text: 'Help'
+        LanguageButton
+            size_hint: .23, .05
+            app: app
+            lang: app.lang
+        MemoRule:
+            lang: app.lang
+
+    BoxLayout:
+        id: citations_page
+        orientation: 'vertical'
+        Label
+            size_hint_y: .05
+            bold: True
+            font_size: '20sp'
+            text: 'Citations'
+        CitationsBox
+
+    BoxLayout:
+        id: about_page
+        orientation: 'vertical'
+        Label:
+            size_hint_y: .1
+            text: 'About'
+            font_size: '20sp'
+            bold: True
+        ScrollLabel:
+            text: about_module.ABOUT_TEXT
+
+# (copy canvas for debugging)
+<RedLabel@Label>:
+    canvas.before:
+        Color:
+            rgba: 1,0,.0,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
