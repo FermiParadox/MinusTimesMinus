@@ -1,6 +1,4 @@
-# README #
-
-### What it does ### 
+# What it does
 
 This program provides randomly generated math exercises with the 
 intention to help a prehighschool student practice on addition 
@@ -20,11 +18,26 @@ presented to the user and whether the terms will be integers or decimals.
 The user is notified if the answer is correct 
 or not and is rewarded for each successful answer, 
 as well as for playing consistently. E.g. there are 
-rewards awarded for playing 30 days in a row (at least one correct answer 
-is needed per day). 
+rewards awarded for playing 30 days in a row (at least 
+one correct answer is needed per day). 
 
+# Goals
+## Gamification
+It must feel like a game. This will keep the 
+student practicing willingly, meaning it will increase 
+his performance and time spent studying. 
 
-### As an app ###
+## Practice often
+In order to complete the achievements the student must 
+play in regular intervals. They learn concepts faster 
+and for longer when they are repeated frequently. 
+Resulting in self-esteem increase.  
+
+## No distractions 
+I intentionally didn't make it more flashy and prettier 
+because the student must be focused only on the task. 
+
+# As an app
 
 <a href='https://play.google.com/store/apps/details?id=com.gmail.germanshepherdaresocute.minustimesminus&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
  
