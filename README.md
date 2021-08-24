@@ -36,6 +36,7 @@ Resulting in self-esteem increase.
 ## No distractions 
 I intentionally didn't make it more flashy and prettier 
 because the student must be focused only on the task. 
+Also, there are no ads in the app for the very same reason.
 
 # As an app
 
