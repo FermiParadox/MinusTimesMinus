@@ -3,7 +3,7 @@ PRIVACY POLICY
 Only user's progress in the game is stored. 
 That data is never shared, and remains in the user's device itself. 
 
-No other data is used, shared, or collect. 
+No other data is used, shared, or collected. 
 
 There are some extra permissions asked when installing the app,
 without actually being used (eg. photos), but this is Kivy related, 
