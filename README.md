@@ -20,9 +20,11 @@ or not and is rewarded for each successful answer,
 as well as for playing consistently. E.g. there are 
 rewards awarded for playing 30 days in a row (at least 
 one correct answer is needed per day). 
-![image](https://user-images.githubusercontent.com/10809024/144005963-d46c304f-139c-483c-bca5-3ad8e0b32ab8.png)
+![image](https://user-images.githubusercontent.com/10809024/144006553-b8fccaa8-6783-4d86-ba81-57f5de420734.png)
 
-![image](https://user-images.githubusercontent.com/10809024/144005733-3cdd5b36-4e6f-4779-960e-af5d472892be.png)
+
+![image](https://user-images.githubusercontent.com/10809024/144007081-643a5f1b-0450-4339-b693-f6f0b1808a54.png)
+
 
 # Goals
 ## Gamification
