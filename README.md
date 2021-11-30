@@ -19,7 +19,8 @@ The user is notified if the answer is correct
 or not and is rewarded for each successful answer, 
 as well as for playing consistently. E.g. there are 
 rewards awarded for playing 30 days in a row (at least 
-one correct answer is needed per day). 
+one correct answer is needed per day).   
+
 ![image](https://user-images.githubusercontent.com/10809024/144006553-b8fccaa8-6783-4d86-ba81-57f5de420734.png)
 
 
