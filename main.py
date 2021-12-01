@@ -402,7 +402,7 @@ class Numpad(StackLayout):
         return btn
 
     def add_numbers(self):
-        for n in xrange(1, 10):
+        for n in range(1, 10):
             self.add_widget(self.number_or_sign_button(num_or_symbol=n))
         # ('0' comes after '9')
         self.add_widget(self.number_or_sign_button(num_or_symbol=0))

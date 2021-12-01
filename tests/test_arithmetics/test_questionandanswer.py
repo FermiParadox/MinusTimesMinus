@@ -36,7 +36,7 @@ class TestQuestion(TestCase):
 
     def test_sings_count_in_multiplication(self):
         for d in self.DIFF_DCT:
-            for _ in xrange(10000):
+            for _ in range(10000):
                 inst = self.QuestionAndAnswer(difficulty_lvl=d, op_type='multiplication')
                 question = inst.operation_str()
                 signs_in_q = question.count('+') + question.count('-')

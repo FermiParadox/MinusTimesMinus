@@ -84,7 +84,7 @@ class Terms(object):
         else:
             raise NotImplemented('{}'.format(self.terms_type))
 
-        for _ in xrange(self.terms_count):
+        for _ in range(self.terms_count):
             term_without_sign = func()
             final_term = self.final_term(term_without_sign=term_without_sign)
             lst.append(final_term)
@@ -209,23 +209,23 @@ if __name__ == '__main__':
             print('\nDifficulty {}'.format(difficulty_lvl))
             # (terms' lists printed for each difficulty lvl)
             terms_lsts_count = 3
-            for _ in xrange(terms_lsts_count):
+            for _ in range(terms_lsts_count):
                 print(Terms(difficulty_lvl=difficulty_lvl).all_terms())
 
         # (tests all difficulties)
-        for d in xrange(1, TOTAL_DIFFICULTY_LVLS + 1):
+        for d in range(1, TOTAL_DIFFICULTY_LVLS + 1):
             print_all_terms(difficulty_lvl=d)
 
         # --------------------------------------------------
         # operation_str() and answer
         print('\n'+'-'*80)
         print('OPERATION STRING')
-        for d in xrange(1, TOTAL_DIFFICULTY_LVLS + 1):
+        for d in range(1, TOTAL_DIFFICULTY_LVLS + 1):
             print('\nDifficulty: {}'.format(d))
 
             for operation in QuestionAndAnswer.OPERATIONS_TYPES:
 
-                for _ in xrange(3):
+                for _ in range(3):
                     inst = QuestionAndAnswer(difficulty_lvl=d, op_type=operation)
                     question = inst.operation_str()
                     answer = inst.expected_answer()
