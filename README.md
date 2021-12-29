@@ -50,7 +50,7 @@ Also, there are no ads in the app for the very same reason.
  
 
 ### Licence ###
-The app is under MIT. Check `LICENCE.TXT` file for more details.
+Unless otherwise noted, the app is under MIT. Check `LICENCE.TXT` file for more details.
 The images are under the copyright of their respective owners.
 
 ### Kivy ###
