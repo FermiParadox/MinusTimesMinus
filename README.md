@@ -1,6 +1,6 @@
 # What it does
 
-This program provides randomly generated math exercises with the 
+Provides randomly generated math exercises with the 
 intention to help a prehighschool student practice on addition 
 or multiplication of integers and decimals. Also, keeps track of user's 
 progress and rewards them.
