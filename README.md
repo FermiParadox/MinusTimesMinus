@@ -1,11 +1,11 @@
 # What it does
 
-Provides randomly generated math exercises with the 
-intention to help a prehighschool student practice on addition 
+Randomly generated math exercises for prehighschool students. on addition 
 or multiplication of integers and decimals. Also, keeps track of user's 
 progress and rewards them.
 
-![MinusTimesMinus](https://user-images.githubusercontent.com/10809024/156883200-b123e949-1c64-43ce-85b0-d044deb75d55.gif)
+
+![MinusTimesMinus](https://user-images.githubusercontent.com/10809024/156883297-da9b2814-9bec-4ffa-bf15-8eb30c2831b3.gif)
 
 
 
