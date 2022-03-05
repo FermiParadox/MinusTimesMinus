@@ -5,6 +5,11 @@ intention to help a prehighschool student practice on addition
 or multiplication of integers and decimals. Also, keeps track of user's 
 progress and rewards them.
 
+![MinusTimesMinus](https://user-images.githubusercontent.com/10809024/156883200-b123e949-1c64-43ce-85b0-d044deb75d55.gif)
+
+
+
+
 In has several difficulty levels, which affect how many terms are 
 presented to the user and whether the terms will be integers or decimals. 
 
@@ -20,11 +25,6 @@ or not and is rewarded for each successful answer,
 as well as for playing consistently. E.g. there are 
 rewards awarded for playing 30 days in a row (at least 
 one correct answer is needed per day).   
-
-![image](https://user-images.githubusercontent.com/10809024/144006553-b8fccaa8-6783-4d86-ba81-57f5de420734.png)
-
-
-![image](https://user-images.githubusercontent.com/10809024/144007081-643a5f1b-0450-4339-b693-f6f0b1808a54.png)
 
 
 # Goals
