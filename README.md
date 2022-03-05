@@ -1,6 +1,6 @@
 # What it does
 
-Randomly generated math exercises for prehighschool students. on addition 
+Randomly generated math exercises for prehighschool students. Addition 
 or multiplication of integers and decimals. Also, keeps track of user's 
 progress and rewards them.
 
@@ -10,7 +10,7 @@ progress and rewards them.
 
 
 
-In has several difficulty levels, which affect how many terms are 
+Several difficulty levels, which affect how many terms are 
 presented to the user and whether the terms will be integers or decimals. 
 
 
@@ -40,7 +40,7 @@ and for longer when they are repeated frequently.
 Resulting in self-esteem increase.  
 
 ## No distractions 
-I intentionally didn't make it more flashy and prettier 
+I intentionally didn't make it more flashy and pretty 
 because the student must be focused only on the task. 
 Also, there are no ads in the app for the very same reason.
 
@@ -55,7 +55,7 @@ The images are under the copyright of their respective owners.
 
 ### Kivy ###
 
-This app was built in python 2.7 with [Kivy](https://kivy.org/#home)
+This app was built in Python with [Kivy](https://kivy.org/#home)
 
 
 Google Play and the Google Play logo are trademarks of Google Inc.
