@@ -774,7 +774,7 @@ class MinusTimesMinusApp(App):
         EventLoop.window.bind(on_keyboard=self.keyboard_callback)
 
     def keyboard_callback(self, window, key, *args):
-        if (platform() == 'android') and (key == 27):
+        if (platform == 'android') and (key == 27):
             self.main_widg.load_previous()
             return True
 
