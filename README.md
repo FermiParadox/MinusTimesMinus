@@ -1,11 +1,16 @@
 # What it does
 
-This program provides randomly generated math exercises with the 
-intention to help a prehighschool student practice on addition 
+Randomly generated math exercises for prehighschool students. Addition 
 or multiplication of integers and decimals. Also, keeps track of user's 
 progress and rewards them.
 
-In has several difficulty levels, which affect how many terms are 
+
+![MinusTimesMinus](https://user-images.githubusercontent.com/10809024/156883297-da9b2814-9bec-4ffa-bf15-8eb30c2831b3.gif)
+
+
+
+
+Several difficulty levels, which affect how many terms are 
 presented to the user and whether the terms will be integers or decimals. 
 
 
@@ -21,11 +26,6 @@ as well as for playing consistently. E.g. there are
 rewards awarded for playing 30 days in a row (at least 
 one correct answer is needed per day).   
 
-![image](https://user-images.githubusercontent.com/10809024/144006553-b8fccaa8-6783-4d86-ba81-57f5de420734.png)
-
-
-![image](https://user-images.githubusercontent.com/10809024/144007081-643a5f1b-0450-4339-b693-f6f0b1808a54.png)
-
 
 # Goals
 ## Gamification
@@ -40,7 +40,7 @@ and for longer when they are repeated frequently.
 Resulting in self-esteem increase.  
 
 ## No distractions 
-I intentionally didn't make it more flashy and prettier 
+I intentionally didn't make it more flashy and pretty 
 because the student must be focused only on the task. 
 Also, there are no ads in the app for the very same reason.
 
@@ -50,12 +50,12 @@ Also, there are no ads in the app for the very same reason.
  
 
 ### Licence ###
-Unless otherwise noted, the app is under MIT. Check `LICENCE.TXT` file for more details.
+Unless otherwise noted, the code is under MIT. Check `LICENCE.TXT` file for more details.
 The images are under the copyright of their respective owners.
 
 ### Kivy ###
 
-This app was built in python 2.7 with [Kivy](https://kivy.org/#home)
+This app was built in Python with [Kivy](https://kivy.org/#home)
 
 
 Google Play and the Google Play logo are trademarks of Google Inc.
